@@ -25,4 +25,3 @@ mv $PACKAGE.zip ..
 cd ..
 rm -rf build-room
 echo "Build successfully!"
-~
