@@ -25,5 +25,6 @@ wp core download
 wp core config --dbhost=$DB_HOST --dbname=$DATABASE_NAME --dbuser=$DB_USER --dbpass=$DB_ROOT_PASS
 chmod 644 wp-config.php
 wp core install --url="${PROJECT_NAME}.test" --title="Project ${PROJECT_NAME}" --admin_name=$USER_NAME --admin_password=$USER_PASS --admin_email=$USER_MAIL
+wp config set WP_DEBUG true --raw 
 open http://${PROJECT_NAME}.test
 history -c && exit
