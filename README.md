@@ -2,7 +2,7 @@
 
 It just some part of bash script for work, make more quickly in work, the `new-wp.sh` working with `Laravel Valet` and `WP-CLI`, you need to install that first.
 
-## What file do
+## What file will do
 1. `db.sh` command for MySQL it just a draft
 2. `wp-new.sh` command for quick create new WordPress in localhost with `WP-CLI` and `Laravel Valet`
 3. `rm-site.sh` completely remove a WordPress site in Laravel Valet Directory
