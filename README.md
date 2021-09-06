@@ -4,7 +4,7 @@ It just some part of bash script for work, make more quickly in work, the `new-w
 
 ## What file do
 1. `db.sh` command for MySQL it just a draft
-2. `new-wp.sh` command for quick create new WordPress in localhost with `WP-CLI` and `Laravel Valet`
+2. `wp-new.sh` command for quick create new WordPress in localhost with `WP-CLI` and `Laravel Valet`
 3. `rm-site.sh` completely remove a WordPress site in Laravel Valet Directory
 4. `wp-build.sh` bash file to build WordPress theme or Plugin with `WP-CLI` command.
 
