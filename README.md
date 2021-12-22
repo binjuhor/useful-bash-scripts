@@ -7,6 +7,7 @@ It just some part of bash script for work, make more quickly in work, the `new-w
 2. `wp-new.sh` command for quick create new WordPress in localhost with `WP-CLI` and `Laravel Valet`
 3. `rm-site.sh` completely remove a WordPress site in Laravel Valet Directory
 4. `wp-build.sh` bash file to build WordPress theme or Plugin with `WP-CLI` command.
+5. `boot.sh` bash file to install new VPS with EasyEngine and Git deploy also add my SSH key to login without use the password.xw
 
 ## Install
 Download file and copy to `bin` folder, in MacOs, is `/usr/local/bin/` directory so you can run it as a command.
