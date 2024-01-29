@@ -5,16 +5,16 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-if [ $1 != "start" ] && [ $1 != "stop" ] && [ $1 != "restart" ] && [ $1 != "use" ]; then
+if [ $1 != "start" ] && [ $1 != "stop" ] && [ $1 != "restart" ] && [ $1 != "use" ] && [ $1 != "up" ] && [ $1 != "down" ]; then
     echo "Usage: $0 start/stop/restart"
     exit 1
 fi
 
-if [ $1 = "start" ]; then
+if [ $1 = "start" ] || [ $1 = "up" ]; then
     valet start
 fi
 
-if [ $1 = "stop" ]; then
+if [ $1 = "stop" ] || [ $1 = "down" ]; then
     valet stop && valet stop dnsmasq
 fi
 
