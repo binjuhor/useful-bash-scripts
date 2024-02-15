@@ -1,10 +1,10 @@
 #!/bin/bash
 if [ $# -eq 0 ]; then
-    echo "Usage: $0 start/stop/restart/down/up/isolate/use"
+    echo "Usage: $0 start/stop/restart/down/up/isolate/use/share"
     exit 1
 fi
 
-if [ $1 != "start" ] && [ $1 != "stop" ] && [ $1 != "restart" ] && [ $1 != "use" ] && [ $1 != "down" ] && [ $1 != "up" ] && [ $1 != "isolate" ]  && [ $1 != "use" ]; then
+if [ $1 != "start" ] && [ $1 != "stop" ] && [ $1 != "restart" ] && [ $1 != "use" ] && [ $1 != "down" ] && [ $1 != "up" ] && [ $1 != "isolate" ]  && [ $1 != "use" ]  && [ $1 != "share" ]; then
     echo "Usage: $0 start/stop/restart/down/up/isolate/use"
     exit 1
 fi
@@ -34,5 +34,5 @@ if [ $1 = "unisolate" ]; then
 fi
 
 if [ $1 = "share" ]; then
-    valet share-tool ngrok
+    valet share
 fi
