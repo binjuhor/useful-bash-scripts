@@ -1,29 +1,29 @@
 #!/bin/bash
-
 # Cloudflare API details
-API_TOKEN="your_api_token" # Replace with your Cloudflare API token
-ZONE_ID="zone_id" # Zone ID for binjuhor.com
-RECORD_ID="record_id" # Record ID for ns.binjuhor.com
+API_TOKEN="your_token" # Replace with your Cloudflare API token
+ZONE_ID="Zone_ID" # Zone ID for domain.com
+RECORD_ID="Record_ID" # Record ID for ns.domain.com
 RECORD_TYPE="A"
 PROXIED=false
 
-
 # The domain you're updating
-DOMAIN="ns.binjuhor.com"
+DOMAIN="domain.com"
+
+# File to store the last known IP address
+IP_FILE="./last_known_ip.txt" # Replace with the path where you want to store the file
 
 # Get current external IP address of the homelab server
 CURRENT_IP=$(curl -s http://ipinfo.io/ip)
 
-# Fetch the current DNS record from Cloudflare
-CLOUDFLARE_RECORD=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$RECORD_ID" \
-     -H "Authorization: Bearer $API_TOKEN" \
-     -H "Content-Type: application/json")
+# Check if the IP file exists, and read the stored IP from the file
+if [ -f "$IP_FILE" ]; then
+    STORED_IP=$(cat "$IP_FILE")
+else
+    STORED_IP=""
+fi
 
-# Extract the IP currently set in Cloudflare for ns.binjuhor.com
-OLD_IP=$(echo "$CLOUDFLARE_RECORD" | jq -r '.result.content')
-
-# Compare the current IP with the IP in Cloudflare
-if [ "$CURRENT_IP" = "$OLD_IP" ]; then
+# Compare the current IP with the stored IP
+if [ "$CURRENT_IP" = "$STORED_IP" ]; then
     echo "IP address ($CURRENT_IP) hasn't changed. No update needed."
     exit 0
 fi
@@ -37,6 +37,9 @@ UPDATE=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns
 # Check if the update was successful
 if echo "$UPDATE" | grep -q '"success":true'; then
     echo "DNS record updated successfully to $CURRENT_IP"
+
+    # Store the new IP in the file
+    echo "$CURRENT_IP" > "$IP_FILE"
 else
     echo "Failed to update DNS record"
     echo "$UPDATE"
