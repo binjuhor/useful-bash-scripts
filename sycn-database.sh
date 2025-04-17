@@ -8,6 +8,7 @@
 
 TABLES=("users" "orders" "products" "categories")
 
+DUMP_DIR="/home/tool/dump"
 LAST_SYNC_FILE="/home/tool/last_sync.txt"
 LAST_SYNC=$(cat "$LAST_SYNC_FILE")
 
@@ -45,11 +46,11 @@ for TABLE in "${TABLES[@]}"; do
     --set-gtid-purged=OFF \
     --insert-ignore \
     --where="updated_at >= '$LAST_SYNC'" \
-    ${REMOTE_DB} ${TABLE} > ${TABLE}_dump.sql
+    ${REMOTE_DB} ${TABLE} > ${DUMP_DIR}/${TABLE}_dump.sql
 
-  if [[ -s ${TABLE}_dump.sql ]]; then
+  if [[ -s ${DUMP_DIR}/${TABLE}_dump.sql ]]; then
     echo "Importing new rows for $TABLE..."
-    mysql --defaults-file=${LOCAL_INFO} ${LOCAL_DB} < ${TABLE}_dump.sql || ALL_SUCCESS=false
+    mysql --defaults-file=${LOCAL_INFO} ${LOCAL_DB} < ${DUMP_DIR}/${TABLE}_dump.sql || ALL_SUCCESS=false
   else
     echo "No new rows in $TABLE"
   fi
