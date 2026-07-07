@@ -18,7 +18,7 @@ cp -r $NAME build-room/$NAME
 cd build-room/$NAME
 yarn build:production
 find . -name '.DS_Store' -type f -delete.
-rm -rf node_modules .git .idea assets/scss *.json *.lock *.map *.scss .DS_Store .gitignore .stylelintrc.json *.txt
+rm -rf node_modules .gitkeep .git .idea assets/scss *.json *.lock *.map *.scss .DS_Store .gitignore .stylelintrc.json *.txt plans docs .claude .vscode *.md
 cd ..
 zip -r $PACKAGE.zip $NAME
 mv $PACKAGE.zip ..
